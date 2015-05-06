@@ -1,0 +1,162 @@
+export LANG=ja_JP.UTF-8
+
+## History
+HISTFILE=$HOME/.zsh-history
+HISTSIZE=100000
+SAVEHIST=100000
+
+## Alias
+alias l='ls -alpG'
+alias mkdir='mkdir -p'
+alias cp='cp -r'
+
+## Prompt
+function str_with_color() {
+    echo "%{$fg[$1]%}$2%{$reset_color%}"
+}
+
+ZSH_THEME_GIT_PROMPT_ADDED=$(str_with_color cyan '+')
+ZSH_THEME_GIT_PROMPT_MODIFIED=$(str_with_color yellow '*')
+ZSH_THEME_GIT_PROMPT_DELETED=$(str_with_color red 'x')
+ZSH_THEME_GIT_PROMPT_RENAMED=$(str_with_color blue 'o')
+ZSH_THEME_GIT_PROMPT_UNMERGED=$(str_with_color magenta '!')
+ZSH_THEME_GIT_PROMPT_UNTRACKED=$(str_with_color grey '?')
+
+function my_git_status() {
+    [ $(current_branch) ] && echo "($(current_branch)$(git_prompt_status))"
+}
+
+#DATE_TIME=$(str_with_color yellow '%D{%Y-%m-%d %K:%M}')
+DATE_TIME=$(str_with_color blue '%D{%Y-%m-%d %K:%M}')
+#PROMPT_PREFIX=$(str_with_color white '#')
+PROMPT_PREFIX=$(str_with_color white '')
+SEPARATOR1=$(str_with_color white '|')
+USER_NAME=$(str_with_color blue '%n')
+SEPARATOR2=$(str_with_color white '@')
+#HOST_NAME=$(str_with_color cyan '%m')
+HOST_NAME=$(str_with_color blue '%m')
+SEPARATOR3=$(str_with_color white ':')
+CURRENT_DIRECTORY=$(str_with_color green '%~')
+PROMPT_CHAR=$(str_with_color white '$ ')
+PROMPT='${PROMPT_PREFIX}${DATE_TIME}${SEPARATOR1}${USER_NAME}${SEPARATOR2}${HOST_NAME}${SEPARATOR3}${CURRENT_DIRECTORY} $(my_git_status)
+$PROMPT_CHAR'
+PROMPT2=$(str_with_color white '> ')
+
+## 補完機能の強化
+autoload -U compinit
+compinit
+
+##source ~/.zsh-extend/cdd
+
+## コアダンプサイズを制限
+limit coredumpsize 102400
+
+## 出力の文字列末尾に改行コードが無い場合でも表示
+unsetopt promptcr
+
+## 色を使う
+setopt prompt_subst
+
+## ビープを鳴らさない
+setopt nobeep
+
+## 内部コマンド jobs の出力をデフォルトで jobs -l にする
+setopt long_list_jobs
+
+## 補完候補一覧でファイルの種別をマーク表示
+setopt list_types
+
+## サスペンド中のプロセスと同じコマンド名を実行した場合はリジューム
+setopt auto_resume
+
+## 補完候補を一覧表示
+setopt auto_list
+
+## 直前と同じコマンドをヒストリに追加しない
+#setopt hist_ignore_dups
+
+## 同じコマンドをヒストリに追加しない
+setopt hist_ignore_all_dups
+
+## cd 時に自動で push
+setopt autopushd
+
+## 同じディレクトリを pushd しない
+setopt pushd_ignore_dups
+
+## TAB で順に補完候補を切り替える
+setopt auto_menu
+
+## zsh の開始, 終了時刻をヒストリファイルに書き込む
+setopt extended_history
+
+## =command を command のパス名に展開する
+setopt equals
+
+## --prefix=/usr などの = 以降も補完
+setopt magic_equal_subst
+
+# ファイル名の展開で辞書順ではなく数値的にソート
+setopt numeric_glob_sort
+
+## 出力時8ビットを通す
+setopt print_eight_bit
+
+## ヒストリを共有
+setopt share_history
+
+## 補完候補のカーソル選択を有効に
+zstyle ':completion:*:default' menu select=1
+
+## 補完候補の色づけ
+zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
+
+## ディレクトリ名だけで cd
+setopt auto_cd
+
+## カッコの対応などを自動的に補完
+setopt auto_param_keys
+
+## ディレクトリ名の補完で末尾の / を自動的に付加し、次の補完に備える
+setopt auto_param_slash
+
+## スペルチェック
+setopt correct
+
+## for cdd
+#function chpwd() {
+#  _reg_pwd_screennum
+#}
+
+## Screen
+if [ "$TERM" = "screen" ]; then
+        precmd(){print -n '\ek\e\\'}
+fi
+#PROMPT='%n@%m:%(5~,%-2~/.../%2~,%~)%# '
+
+## Android
+export ANDROID_HOME="/Applications/Android Studio.app/sdk"
+export PATH="$PATH:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools"
+
+### Added by the Heroku Toolbelt
+export PATH="/usr/local/heroku/bin:$PATH"
+export PATH="~/bin:/usr/local/bin:$PATH"
+
+## rbenv
+export PATH="$HOME/.rbenv/bin:$PATH"
+if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
+
+## homebrew
+export PATH="$(brew --prefix)/bin:$PATH"
+
+## Sublime Text
+export PATH="$HOME/bin:$PATH"
+
+## Antigen
+source $HOME/.zsh/antigen/antigen.zsh
+antigen bundle zsh-users/zsh-syntax-highlighting
+antigen apply
+
+## Gradle
+#THIS MUST BE AT THE END OF THE FILE FOR GVM TO WORK!!!
+[[ -s "/Users/ishida/.gvm/bin/gvm-init.sh" ]] && source "/Users/ishida/.gvm/bin/gvm-init.sh"

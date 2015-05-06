@@ -1,0 +1,30 @@
+[user]
+	name = Katsunobu Ishida
+	email = ishidak@gmail.com
+[color]
+	diff = auto
+	status = auto
+	branch = auto
+	ui = auto
+[core]
+	excludesfile = ~/.gitignore_global
+[http]
+	sslverify = false
+[push]
+	default = simple
+[alias]
+	s = status
+	gr = log --graph --date=short --decorate=short --pretty=format:'%Cgreen%h %Creset%cd %Cblue%cn %Cred%d %Creset%s'
+	ci = commit
+	co = checkout
+	b = branch
+	dm = diff master           # masterとのdiff
+	dw = diff --color-words    # 単語単位でいろつけてdiff
+	dc = diff --cached         # addされているものとのdiff
+	ds = diff --staged         # 同上(1.6.1移行)
+	d1 = diff HEAD~            # HEADから1つ前とdiff
+	d2 = diff HEAD~~           # HEADから2つ前とdiff
+	d3 = diff HEAD~~~          # HEADから3つ前とdiff
+	d4 = diff HEAD~~~~         # HEADから4つ前とdiff
+	d5 = diff HEAD~~~~~        # HEADから5つ前とdiff
+	d10 = diff HEAD~~~~~~~~~~  # HEADから10前とdiff
