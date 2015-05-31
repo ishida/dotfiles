@@ -1,5 +1,5 @@
 # Path to your oh-my-zsh installation.
-export ZSH=$HOME/.dotfiles/.oh-my-zsh
+export ZSH=$HOME/.oh-my-zsh
 
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
@@ -49,7 +49,10 @@ ZSH_THEME="candy"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git themes)
+plugins=(
+git
+themes
+)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -73,6 +76,6 @@ source $ZSH/oh-my-zsh.sh
 # ssh
 # export SSH_KEY_PATH="~/.ssh/dsa_id"
 
-#最後に追加
-[ -f ~/.zshrc.mine ] && source $HOME/.dotfiles/.zshrc.mine  #自分の.zshrcを有効にする
-[ -f ~/.zshrc.local ] && source ~/.zshrc.local # ローカルの設定を読み込む
+# 最後に追加
+[ -f ~/.zshrc.local ] && source ~/.zshrc.local # リポジトリ共有しない個人設定
+[ -f ~/.zshrc.mine ] && source $HOME/.dotfiles/.zshrc.mine # リポジトリ共有する個人設定

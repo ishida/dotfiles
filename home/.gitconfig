@@ -13,11 +13,9 @@
 [push]
 	default = simple
 [alias]
-	s = status
-	gr = log --graph --date=short --decorate=short --pretty=format:'%Cgreen%h %Creset%cd %Cblue%cn %Cred%d %Creset%s'
+	b = branch
 	ci = commit
 	co = checkout
-	b = branch
 	dm = diff master           # masterとのdiff
 	dw = diff --color-words    # 単語単位でいろつけてdiff
 	dc = diff --cached         # addされているものとのdiff
@@ -28,3 +26,5 @@
 	d4 = diff HEAD~~~~         # HEADから4つ前とdiff
 	d5 = diff HEAD~~~~~        # HEADから5つ前とdiff
 	d10 = diff HEAD~~~~~~~~~~  # HEADから10前とdiff
+	s = status
+	l = log --graph --date=short --decorate=short --pretty=format:'%Cgreen%h %Creset%cd %Cblue%cn %Cred%d %Creset%s'
