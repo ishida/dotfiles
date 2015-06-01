@@ -77,5 +77,5 @@ source $ZSH/oh-my-zsh.sh
 # export SSH_KEY_PATH="~/.ssh/dsa_id"
 
 # 最後に追加
-[ -f ~/.zshrc.local ] && source ~/.zshrc.local # リポジトリ共有しない個人設定
-[ -f ~/.zshrc.mine ] && source $HOME/.dotfiles/.zshrc.mine # リポジトリ共有する個人設定
+[ -f $HOME/.zshrc.local ] && source $HOME/.zshrc.local # リポジトリ共有しない個人設定
+[ -f $HOME/.zshrc.mine ] && source $HOME/.zshrc.mine # リポジトリ共有する個人設定
